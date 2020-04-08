@@ -1,5 +1,6 @@
 package com.cursojava.curso.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +29,11 @@ public class PostService {
 
 		return post.get();
 	}
-	
+
 	public Post findByTitle(String text) {
+
 		Post post = repo.searchTitle(text).get(0);
+
 		if (post == null) {
 			throw new ObjectNotFoundException("Objeto não encontradoro");
 		}
@@ -42,15 +45,14 @@ public class PostService {
 		return repo.insert(obj);
 	}
 
-
 	public void delete(String id) {
 		this.findById(id);
 		repo.deleteById(id);
 	}
-	
 
-
-	
+	public List<Post> fullSearch(String text, Date minDate, Date maxDate) {
+		maxDate = new Date(maxDate.getTime() + 21 * 60 * 60 * 1000);
+		return repo.fullSearch(text, minDate, maxDate);
+	}
 
 }
-
