@@ -1,8 +1,11 @@
 package com.cursojava.curso.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +26,9 @@ public class User implements Serializable {
 	private String id;
 	private String name;
 	private String email;
+
+	@DBRef(lazy = true)
+	private List<Post> posts = new ArrayList<>();
 
 	@Override
 	public int hashCode() {
@@ -47,6 +53,13 @@ public class User implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public User(String id, String name, String email) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.cursojava.curso.dto;
 
+import java.io.Serializable;
+
 import com.cursojava.curso.domain.User;
 
 import lombok.AllArgsConstructor;
@@ -11,16 +13,16 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class AuthorDTO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String id;
 	private String name;
-	private String email;
-
-	public UserDTO(User user) {
-		this.id = user.getId();
-		this.name = user.getName();
-		this.email = user.getEmail();
+	
+	public AuthorDTO(User user) {
+		this.setId(user.getId());
+		this.setName(user.getName());
 	}
 
 }
